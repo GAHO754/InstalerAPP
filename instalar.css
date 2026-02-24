@@ -1,0 +1,31 @@
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  height:100vh;
+
+  background-image: url("LogotipoenFondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+.container{
+  text-align:center;
+}
+
+button{
+  display:block;
+  margin:15px auto;
+  padding:15px 25px;
+  border:none;
+  border-radius:10px;
+  background:#e31837;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
