@@ -1,19 +1,32 @@
-const urlApp = "https://applebeesappmx.kesug.com/";
+let deferredPrompt;
+const btn = document.getElementById("installBtn");
+const iosText = document.getElementById("iosMessage");
 
-document.getElementById("androidBtn").onclick = () => {
-  window.location.href = urlApp;
-};
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
-document.getElementById("iosBtn").onclick = () => {
-  alert(
-    "Para instalar en iPhone:\n\n" +
-    "1. Abre la app en Safari\n" +
-    "2. Presiona Compartir\n" +
-    "3. Agregar a pantalla de inicio"
-  );
-  window.location.href = urlApp;
-};
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
 
-document.getElementById("pcBtn").onclick = () => {
-  window.location.href = urlApp;
-};
+btn.addEventListener("click", async () => {
+
+  // Android
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    return;
+  }
+
+  // iPhone
+  if (isIOS) {
+    iosText.innerHTML =
+      "Para instalar la app:<br><br>" +
+      "1️⃣ Abre en <b>Safari</b><br>" +
+      "2️⃣ Presiona <b>Compartir</b><br>" +
+      "3️⃣ Agregar a pantalla de inicio";
+  } else {
+    iosText.innerHTML = "Tu dispositivo no permite instalación directa.";
+  }
+
+});
